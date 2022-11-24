@@ -36,10 +36,31 @@ public class GeographicCoordinate {
 
     @Override
     public String toString() {
-        return "Karthesisch: (" + this.getX() + ", " + this.getY() + ")\n" +
-                "Polar: (" + this.getR() + ", " + this.getPhi()+"°)";
+        return "(" + this.getX() + ", " + this.getY() + ")\n";
+    }
+    public static boolean isEqual(GeographicCoordinate gc1, GeographicCoordinate gc2) {
+        return gc1.getX() == gc2.getX() && gc1.getY() == gc2.getY();
     }
     public static double getDistance(GeographicCoordinate gc1, GeographicCoordinate gc2){
         return Math.sqrt(Math.pow(gc1.getX()-gc2.getX(),2)+Math.pow(gc1.getY()-gc2.getY(),2));
     }
+    public double getDistanceTo0(){
+        return r;
+    }
+    public static GeographicCoordinate add(GeographicCoordinate gc1, GeographicCoordinate gc2){
+        return new GeographicCoordinate((float) (gc1.getX()+gc2.getX()),(float) (gc1.getY()+gc2.getY()));
+    }
+    public static GeographicCoordinate sub(GeographicCoordinate gc1, GeographicCoordinate gc2){
+        return new GeographicCoordinate((float) (gc1.getX()-gc2.getX()),(float) (gc1.getY()-gc2.getY()));
+    }
+    public static int compare(GeographicCoordinate gc1, GeographicCoordinate gc2){
+        if(gc1.getR()>gc2.getR()){
+            return 1;
+        }else if(gc1.getR()<gc2.getR()){
+            return -1;
+        }else {
+            return 0;
+        }
+    }
+
 }
